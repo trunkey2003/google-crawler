@@ -1,15 +1,16 @@
 const cheerio = require('cheerio');
 
 class googleService {
-    getPeopleAlsoAskQuestions(googleSearchHtml) {
-        const $ = cheerio.load(googleSearchHtml);
+    getPeopleAlsoAskQuestions({searchQuery, searchGoogleHtml}) {
+        const $ = cheerio.load(searchGoogleHtml);
         const body = $('body').first(); 
         const peopleAlsoAskQuestions = [];
-        body.find('div[class="fLtXsc iIWm4b"]').each((i, el) => {
+        body.find('div[class="fLtXsc iIWm4b"][aria-expanded="false"]').each((i, el) => {
             const text = $(el).text();
             if (text) peopleAlsoAskQuestions.push($(el).text());
         });
         return {
+            searchQuery: searchQuery,
             peopleAlsoAskQuestions: peopleAlsoAskQuestions
         };
     }

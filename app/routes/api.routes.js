@@ -3,6 +3,6 @@ var router = express.Router();
 
 const googleController = require('../controllers/google.controller');
 
-router.get('/', googleController.index);
+router.get('/google/peopleAlsoAskQuestions', googleController.index);
 
 module.exports = router;
