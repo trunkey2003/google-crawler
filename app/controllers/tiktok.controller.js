@@ -62,7 +62,9 @@ class tiktokController {
     const { tt_access_token } = req.cookies;
 
     console.log(tt_access_token);
-    
+
+    if (!tt_access_token) return respond({ res, statusCode: 401, message: "Unauthorized, please send tt_access_token" });
+
     let config = {
       headers: {
         Authorization:
