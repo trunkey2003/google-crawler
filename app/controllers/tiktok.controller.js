@@ -60,6 +60,9 @@ class tiktokController {
 
   userInfo(req, res) {
     const { tt_access_token } = req.cookies;
+
+    console.log(tt_access_token);
+    
     let config = {
       headers: {
         Authorization:
