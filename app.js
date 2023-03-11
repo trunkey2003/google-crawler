@@ -13,7 +13,6 @@ const apiRouter = require('./app/routes/api.routes');
 
 const app = express();
 app.use(cors({ credentials: true, origin: [process.env.CLIENT_HOSTNAME_1, process.env.CLIENT_HOSTNAME_2, process.env.CLIENT_HOSTNAME_3]}));
-app.use(cookieParser());
 
 // const db = require('./configs/db');
 // db.connect();
