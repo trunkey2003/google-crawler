@@ -9,7 +9,7 @@ class tiktokController {
   oAuth(req, res, next) {
     try {
       const csrfState = Math.random().toString(36).substring(2);
-      res.cookie("csrfState", csrfState, { maxAge: 60000 });
+      // res.cookie("csrfState", csrfState, { maxAge: 60000 });
 
       let url = "https://open-api.tiktok.com/platform/oauth/connect";
 
@@ -28,12 +28,12 @@ class tiktokController {
 
   redirect(req, res) {
     const { code, state } = req.query;
-    const { csrfState } = req.cookies;
+    // const { csrfState } = req.cookies;
 
-    if (state !== csrfState) {
-      res.status(422).send("Invalid state");
-      return;
-    }
+    // if (state !== csrfState) {
+    //   res.status(422).send("Invalid state");
+    //   return;
+    // }
 
     let url_access_token = "https://open-api.tiktok.com/oauth/access_token/";
     url_access_token += "?client_key=" + CLIENT_KEY;
