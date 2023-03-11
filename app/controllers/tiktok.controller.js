@@ -66,7 +66,7 @@ class tiktokController {
     if (!tt_access_token)
       return respond({
         res,
-        statusCode: 200,
+        statusCode: 401,
         message: "Unauthorized, please send tt_access_token",
       });
 
@@ -91,15 +91,22 @@ class tiktokController {
   }
 
   videoList(req, res) {
-    const { tt_access_token } = req.cookies;
+    const { tt_access_token } = req.headers;
+
+    if (!tt_access_token)
+      return respond({
+        res,
+        statusCode: 401,
+        message: "Unauthorized, please send tt_access_token",
+      });
+      
     let config = {
       headers: {
-        Authorization:
-          "Bearer " +
-          "act.d247e62cd135a4ec258ac0625b4296e0C1EA1ciujcr1hlMylrRuX3wqpSCi!6509",
+        Authorization: "Bearer " + tt_access_token,
         "Content-Type": "application/json",
       },
     };
+
     let urlVideoList = tiktokApis + "/video/list/";
     urlVideoList +=
       "?fields=id,create_time,cover_image_url,share_url,video_description,duration,height,width,title,embed_html,embed_link,like_count,comment_count,share_count,view_count";
